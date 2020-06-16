@@ -5,6 +5,7 @@ Generate and view aXe a11y reports. Uses Flask for cli functionality and web ser
 ## Prerequisites
 * Python 3.7 with pip3 (install using Homebrew ```brew install python3```)
 * Pipenv: ```pip3 install pipenv```
+* The appropriate driver for the browser you intend to use, downloaded and added to your path, e.g. geckodriver for Firefox: ```brew install geckodriver```
 
 ## Project setup
 1) Clone repo: ```git clone [repo_link]```

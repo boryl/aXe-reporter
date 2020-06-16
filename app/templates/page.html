@@ -1,0 +1,111 @@
+  {% extends "base.html" %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block content %}
+	<nav class="bg-black-90 fixed w-100 ph3 pv3 pv3-ns ph4-m ph4-l">
+		<a  class="link dim white dib mr3 {% if current_page == None %}b{% endif %}" href="/">All</a>
+		{% for item in pages %}
+			<a class="link dim white dib mr3 {% if item[0] == current_page %}b{% endif %}" href="/?page={{ item[0] }}">{{ item[0]|capitalize }}</a>
+		{% endfor %}
+	</nav>
+	<header class="f6 w-100 mw8 pa4 pt4 pb0">
+			
+		<h1 class="f1">{{ title }}</h1>
+		
+	</header>	
+	<main class="pa4 pt0">
+		<h2 class="f4 pb2">
+			{% if current_page != None %}
+				{% for item in pages %}
+					{% if current_page == item[0] %}
+						<a href="{{ item[1] }}">{{ current_page }}</a>
+					{% endif %}
+				{% endfor %}
+				
+			{% else %}
+				All pages
+			{% endif %}
+		</h2>
+		<div class="overflow-auto">
+			<table class="f6 w-100 mw10" cellspacing="0">
+				<thead>
+					<tr>
+						<th class="fw6 bb b--black-20 tl pb3 pr3 bg-white">Page</th>
+						<th class="fw6 bb b--black-20 tl pb3 pr3 bg-white">Impact</th>
+						<th class="fw6 bb b--black-20 tl pb3 pr3 bg-white">Rule</th>
+						<th class="fw6 bb b--black-20 tl pb3 pr3 bg-white">Riktlinje</th>
+						<th class="fw6 bb b--black-20 tl pb3 pr3 bg-white">Description</th>
+						<th class="fw6 bb b--black-20 tl pb3 pr3 bg-white">Help</th>
+						<th class="fw6 bb b--black-20 tl pb3 pr3 bg-white">Nodes</th>
+					</tr>
+				</thead>
+				<tbody class="lh-copy">
+					
+						
+						
+					{% for row in report %}
+						{% if row.page == current_page or current_page == None %}
+						<tr>
+							<td class="pv3 pr3 bb b--black-20 v-top">{{ row.page|capitalize }}</td>
+							<td class="pv3 pr3 bb b--black-20 v-top">{{ row.impact|capitalize }}</td>
+							<td class="pv3 pr3 bb b--black-20 v-top">
+								{% for tag in row.tags %}
+						
+									{{ tag }}<br>
+								{% endfor %}
+							</td>
+							<td class="pv3 pr3 bb b--black-20 v-top">
+								
+								{% for riktlinje in riktlinjer %}
+									{% if riktlinje.wcag == row.tags|last %}
+									<a href="{{ riktlinje.riktlinje_url }}">{{ riktlinje.riktlinje }}</a>
+									{% endif %}
+								{% endfor %}
+								
+							</td>
+							<td class="pv3 pr3 bb b--black-20 v-top">{{ row.description }}</td>
+							<td class="pv3 pr3 bb b--black-20 v-top">
+								<a href="{{row.helpUrl}}">
+									{{ row.help }}
+								</a>
+							</td>
+							<td class="pv3 pr3 bb b--black-20 v-top">
+								
+								{% for node in row.nodes %}
+								
+										<strong>Summary: </strong><br>{{ node.failureSummary }}<br><br>
+										<strong>HTML: </strong><br>{{ node.html }}<br><br>
+
+									{% for related in node.any %}
+										{% if related.relatedNodes|length > 0 %}
+										<strong>Related HTML: </strong>
+										<ul>
+											{% for related_html in related.relatedNodes %}
+												
+												<li>{{ related_html.html }}</li>
+											{% endfor %}
+										</ul>
+										{% endif %}
+									
+									{% endfor %}
+								{% endfor %}
+							</td>
+						
+						</tr>
+						{% endif %}
+						
+						
+					{% endfor %}
+					
+						
+					
+
+				
+				</tbody>
+			</table>
+		</div>
+		
+
+	 </main>
+{% endblock %}

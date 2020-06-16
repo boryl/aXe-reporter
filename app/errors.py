@@ -1,6 +1,6 @@
 '''
     File name: errors.py
-    Projekt: Flask boilerplate
+    Project: aXe reporter
     Author: Björn-Olle Rylander
     Date created: 2019-07-07
     Python Version: 3.7.4

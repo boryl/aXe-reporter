@@ -1,0 +1,15 @@
+[
+
+    {
+        "wcag": "wcag144",
+        "wcag_url": "#",
+        "riktlinje": "127",
+        "riktlinje_url": "https://webbriktlinjer.se/riktlinjer/127-se-till-att-text-gar-att-forstora-utan-problem/"
+    },
+    {
+        "wcag": "wcag143",
+        "wcag_url": "#",
+        "riktlinje": "126",
+        "riktlinje_url": "https://webbriktlinjer.se/riktlinjer/126-tillrackliga-kontraster/"
+    }
+]

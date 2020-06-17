@@ -19,3 +19,5 @@ Generate and view aXe a11y reports. Uses Flask for cli functionality and web ser
 
 ## View reports
 Start Flask server: ```flask run```
+
+Note: Issues found on the first item in pages.csv will not be showed on the following items if repeated

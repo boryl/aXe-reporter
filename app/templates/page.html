@@ -3,8 +3,10 @@
 {% block title %}{{ title }}{% endblock %}
 
 {% block content %}
+	{% if current_page == None %}
+		{% set current_page = pages[0][0] %}
+	{% endif %}
 	<nav class="bg-black-90 fixed w-100 ph3 pv3 pv3-ns ph4-m ph4-l">
-		<a  class="link dim white dib mr3 {% if current_page == None %}b{% endif %}" href="/">All</a>
 		{% for item in pages %}
 			<a class="link dim white dib mr3 {% if item[0] == current_page %}b{% endif %}" href="/?page={{ item[0] }}">{{ item[0]|capitalize }}</a>
 		{% endfor %}
@@ -90,8 +92,11 @@
 											{% endfor %}
 										</ul>
 										{% endif %}
-									
+										
 									{% endfor %}
+									{% if not loop.last %}
+										<hr>
+									{% endif %}
 								{% endfor %}
 							</td>
 						

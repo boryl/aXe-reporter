@@ -47,17 +47,18 @@ def home():
     common_targets = []
     for row in framework:
         for common_node in row['nodes']:
-            common_targets.append((common_node['target'], common_node['failureSummary']))
+            common_targets.append((common_node['html'], common_node['failureSummary']))
 
 
     for page in pages:
         with open(axe_path + 'reports/' + page[0] + '.json') as json_file:
             file_data = json.load(json_file)
             
-            unique_targets = []
+            
             for row in file_data:
+                unique_targets = []
                 for current_node in row['nodes']:
-                    if (current_node['target'], current_node['failureSummary']) not in common_targets:
+                    if (current_node['html'], current_node['failureSummary']) not in common_targets:
                         unique_targets.append(current_node)
 
                 if page[0] != framework_name:

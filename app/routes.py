@@ -34,27 +34,42 @@ def home():
         pages = []
         for row in csv_reader:
             pages.append(row)
-
-    # with open(axe_path + 'pages.json') as json_file:
-    #     pages = json.load(json_file)
     
     with open(axe_path + 'riktlinjer.json') as json_file:
         riktlinjer = json.load(json_file)
 
     report = []
 
+    with open(axe_path + 'reports/' + pages[0][0] + '.json') as json_file:
+            framework = json.load(json_file)
+            framework_name = pages[0][0]
+
+    common_targets = []
+    for row in framework:
+        for common_node in row['nodes']:
+            common_targets.append((common_node['target'], common_node['failureSummary']))
+
+
     for page in pages:
         with open(axe_path + 'reports/' + page[0] + '.json') as json_file:
             file_data = json.load(json_file)
             
+            unique_targets = []
             for row in file_data:
+                for current_node in row['nodes']:
+                    if (current_node['target'], current_node['failureSummary']) not in common_targets:
+                        unique_targets.append(current_node)
+
+                if page[0] != framework_name:
+                    row['nodes'] = unique_targets
                 row['page'] = page[0]
-                report.append(row)
+                if len(row['nodes']) > 0:
+                    report.append(row)
 
-
+    
     sortorder={"critical": 0, "serious":1, "moderate":2, "minor":3}
     report.sort(key=lambda x: (sortorder[x["impact"]], x['page']))
-    
+
 
     templateData = {
         'title': "aXe - report",

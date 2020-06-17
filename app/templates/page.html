@@ -27,6 +27,9 @@
 				All pages
 			{% endif %}
 		</h2>
+		{% if current_page == pages[0][0] %}
+			<p class="mb4">Common issues is only showed on this page</p>
+		{% endif %}
 		<div class="overflow-auto">
 			<table class="f6 w-100 mw10" cellspacing="0">
 				<thead>

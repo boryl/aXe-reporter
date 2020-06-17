@@ -14,7 +14,7 @@ Generate and view aXe a11y reports. Uses Flask for cli functionality and web ser
 4) Copy and rename example.env -> .env
 
 ## Generate reports
-1) Copy and paste tab separated page and url info into ```axe/pages.csv``` (page_name [tab] url)
+1) Copy and paste tab separated page and url info from Google Sheets/Excel into ```axe/pages.csv``` (page_name [tab] url). 
 2) Run cli commmand: ```flask axe run```
 
 ## View reports
